@@ -1,0 +1,29 @@
+image:
+  file: .gitpod.Dockerfile  # Optional: Use a custom Dockerfile if you need to customize the base image
+
+tasks:
+  - name: Setup Ruby & Jekyll
+    init: |
+      # Install Ruby and build-essential packages
+      sudo apt-get update
+      sudo apt-get install -y ruby-full build-essential zlib1g-dev
+      
+      # Set up gem installation path in ~/.bashrc
+      echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+      echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+      echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+      
+      # Load the ~/.bashrc changes
+      source ~/.bashrc
+      
+      # Install Jekyll and Bundler
+      gem install jekyll bundler
+
+    command: |
+      # Check Jekyll installation
+      jekyll -v
+
+vscode:
+  extensions:
+    - rebornix.Ruby
+    - jekyll.jekyll-vscode
